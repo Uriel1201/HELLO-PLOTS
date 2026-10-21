@@ -1,4 +1,4 @@
-# hELLO PLOTS
+# HELLO PLOTS
 ### Matplotlib 
 <img src="https://raw.githubusercontent.com/Uriel1201/data-repository/refs/heads/main/images/logo-wide-lightbg.svg" alt="Hello Java" width="140">
 
