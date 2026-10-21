@@ -6,6 +6,7 @@
 #     "numpy>=2.5.4",
 # ]
 # ///
+import sys
 import os
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -28,3 +29,13 @@ def plot_dist(index_array: np.ndarray) -> None:
         bbox_inches="tight"
     )
     plt.close()
+
+def main() -> None:
+    index_array = np.loadtxt(
+        sys.stdin,
+        dtype=np.int64
+    )
+    plot_dist(index_array)
+    
+if __name__ == "__main__":
+    main()
