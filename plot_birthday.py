@@ -13,8 +13,7 @@ import numpy as np
 
 os.makedirs("images", exist_ok=True)
 
-def plot_birthday(frequencies:np.ndarray) -> None:
-    index = np.arange(1, len(frequencies) + 1)
+def plot_birthday(index: np.ndarray, frequencies:np.ndarray) -> None:
     plt.figure(figsize = (7, 9))
     sns.set(style = 'darkgrid')
     plt.title(f'P_X(x) = 0.50')
@@ -45,10 +44,15 @@ def plot_birthday(frequencies:np.ndarray) -> None:
     plt.close()
 
 def main() -> None:
-    frequencies = np.loadtxt(sys.stdin, 
-        dtype=np.int64
+    data = np.loadtxt(
+        sys.stdin,
+        delimiter=",",
+        dtype=float
     )
-    plot_birthday(frequencies)
-  
+
+    index = data[:, 0]
+    frequencies = data[:, 2]
+    plot_birthday(index, frequencies)
+    
 if __name__ == "__main__":
     main()
