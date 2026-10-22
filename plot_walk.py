@@ -1,3 +1,19 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "matplotlib>=3.11.2",
+#     "seaborn>=0.13.2",
+#     "numpy>=2.5.4",
+# ]
+# ///
+import sys
+import os
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+os.makedirs("images", exist_ok=True)
+
 print(f'Final Steps: {steps}')
         X = np.array(x, dtype = int)
         Y = np.array(y, dtype = int)
