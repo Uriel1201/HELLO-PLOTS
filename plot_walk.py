@@ -24,13 +24,13 @@ def plot_walk(pattern: np.ndarray) -> None:
     plt.ylabel(f'step j')
     sns.scatterplot(x = X, y = Y, color = '#088F8F', marker = 'o')
     plt.tight_layout()
-    fig.savefig(
+    plt.savefig(
         "images/random_walk.png",
         dpi=150,
         bbox_inches="tight",
         pad_inches=0
     )
-    plt.close(fig)
+    plt.close()
 
 def main() -> None:
     lines = sys.stdin.readlines()[:-1]
