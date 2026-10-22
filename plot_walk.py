@@ -35,7 +35,7 @@ def plot_walk(pattern: np.ndarray) -> None:
 def main() -> None:
     lines = sys.stdin.readlines()[:-1]
     pattern = np.loadtxt(
-        sys.stdin,
+        lines,
         dtype=np.int64
     )
     plot_walk(pattern)
