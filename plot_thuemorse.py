@@ -28,7 +28,7 @@ def plot_thuemorse(pattern: np.ndarray) -> None:
     patch_collection = PatchCollection(patches_list, match_original = True)
     ax.add_collection(patch_collection)
     plt.title(f"Thue-Morse Sequence")
-    plt.savefig("images/discret_distribution.png", 
+    plt.savefig("images/thue_morse.png", 
         dpi=150,
         bbox_inches="tight"
     )
