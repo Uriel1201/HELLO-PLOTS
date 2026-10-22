@@ -15,24 +15,23 @@ from matplotlib.collections import PatchCollection
 os.makedirs("images", exist_ok=True)
 
 def plot_thuemorse(pattern: np.ndarray) -> None:
-    patches_list = []
     fig, ax = plt.subplots()
-    n = pattern.shape[0]
-    ax.set_xlim(0, n)
-    ax.set_ylim(0, n)
-    for i in range(pattern.shape[0]):
-        for j in range(pattern.shape[1]):
-            color = "black" if pattern[i, j] == "+" else "white"
-            r = pch.Rectangle((j, i), 1, 1, facecolor=color)
-            patches_list.append(r)
-    patch_collection = PatchCollection(patches_list, match_original = True)
-    ax.add_collection(patch_collection)
-    plt.title(f"Thue-Morse Sequence")
-    plt.savefig("images/thue_morse.png", 
-        dpi=150,
-        bbox_inches="tight"
+
+    ax.imshow(
+        pattern == "+",
+        cmap="binary",
+        interpolation="nearest",
+        origin="upper"
     )
-    plt.close()
+
+    ax.set_axis_off()
+    fig.savefig(
+        "images/thue_morse.png",
+        dpi=150,
+        bbox_inches="tight",
+        pad_inches=0
+    )
+    plt.close(fig)
 
 def main() -> None:
     pattern = np.loadtxt(
