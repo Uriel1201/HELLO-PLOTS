@@ -5,6 +5,8 @@
 #     "numpy>=2.5.4",
 # ]
 # ///
+import sys
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as pch
