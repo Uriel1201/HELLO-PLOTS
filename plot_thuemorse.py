@@ -16,6 +16,8 @@ os.makedirs("images", exist_ok=True)
 
 def plot_thuemorse(pattern: np.ndarray) -> None:
     print(pattern)
+    print(pattern.ndim)
+    print(pattern[0][0])
 
 def main() -> None:
     pattern = np.loadtxt(
