@@ -12,6 +12,8 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as pch
 from matplotlib.collections import PatchCollection
 
+os.makedirs("images", exist_ok=True)
+
 def plot_thuemorse(pattern: np.ndarray) -> None:
     print(pattern)
 
