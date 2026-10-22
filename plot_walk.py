@@ -14,19 +14,18 @@ import numpy as np
 
 os.makedirs("images", exist_ok=True)
 
-def plot_walk() -> None:
-        X = np.array(x, dtype = int)
-        Y = np.array(y, dtype = int)
-        plt.figure(figsize = (9, 7))
-        sns.set(style= 'darkgrid')
-        plt.title(f'Random Walk with p = 1/2')
-        plt.xlabel(f'step i')
-        plt.ylabel(f'step j')
-        sns.scatterplot(x = X, y = Y, color = '#088F8F', marker = 'o')
-        plt.tight_layout()
-        plt.show()
+def plot_walk(pattern: np.ndarray) -> None:
+    X = pattern[:,0]
+    Y = pattern[:,1]
+    plt.figure(figsize = (9, 7))
+    sns.set(style= 'darkgrid')
+    plt.title(f'Random Walk with p = 1/4')
+    plt.xlabel(f'step i')
+    plt.ylabel(f'step j')
+    sns.scatterplot(x = X, y = Y, color = '#088F8F', marker = 'o')
+    plt.tight_layout()
     fig.savefig(
-        "images/thue_morse.png",
+        "images/random_walk.png",
         dpi=150,
         bbox_inches="tight",
         pad_inches=0
@@ -34,11 +33,12 @@ def plot_walk() -> None:
     plt.close(fig)
 
 def main() -> None:
+    lines = sys.stdin.readlines()[:-1]
     pattern = np.loadtxt(
         sys.stdin,
         dtype=np.int64
     )
-    plot_thuemorse(pattern)
+    plot_walk(pattern)
     
 if __name__ == "__main__":
     main()
