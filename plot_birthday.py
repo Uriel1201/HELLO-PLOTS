@@ -18,7 +18,7 @@ os.makedirs("images", exist_ok=True)
 
 def plot_birthday(index: np.ndarray, frequencies:np.ndarray) -> None:
     plt.figure(figsize = (7, 9))
-    sns.set(style = 'darkgrid')
+    sns.set_theme(style = 'darkgrid')
     plt.title(f'P_X(x) = 0.50')
     plt.xlabel(f'x')
     plt.ylabel(f'Cumulative')
