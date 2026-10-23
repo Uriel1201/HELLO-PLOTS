@@ -11,6 +11,7 @@ import sys
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+import pyarrow as pa
 
 os.makedirs("images", exist_ok=True)
 
