@@ -21,7 +21,7 @@ def plot_birthday(index: np.ndarray, frequencies:np.ndarray) -> None:
     sns.set_theme(style = 'darkgrid')
     plt.title(f'P_X(x) = 0.50')
     plt.xlabel(f'x')
-    plt.ylabel(f'Cumulative')
+    plt.ylabel(f'Distribution Function')
     sns.scatterplot(x = index,
         y = frequencies,
         color = '#088F8F'
