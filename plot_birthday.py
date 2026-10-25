@@ -16,18 +16,18 @@ import pyarrow as pa
 
 os.makedirs("images", exist_ok=True)
 
-def plot_birthday(index: np.ndarray, frequencies:np.ndarray) -> None:
+def plot_birthday(index: np.ndarray, p:np.ndarray) -> None:
     plt.figure(figsize = (7, 9))
     sns.set_theme(style = 'darkgrid')
     plt.title(f'P_X(x) = 0.50')
     plt.xlabel(f'x')
     plt.ylabel(f'Distribution Function')
     sns.scatterplot(x = index,
-        y = frequencies,
+        y = p,
         color = '#088F8F'
     )
     f_x = index[-1]
-    f_y = frequencies[-1]
+    f_y = p[-1]
     plt.text(x = f_x,
         y = f_y,
         s = f'{f_x}',
@@ -50,8 +50,8 @@ def main() -> None:
     with pa.ipc.open_stream(sys.stdin.buffer) as reader:
         table = reader.read_all()
     index = table["k"].to_numpy()
-    frequencies = table["p_k"].to_numpy()
-    plot_birthday(index, frequencies)
+    p = table["p_k"].to_numpy()
+    plot_birthday(index, p)
 
 if __name__ == "__main__":
     main()
