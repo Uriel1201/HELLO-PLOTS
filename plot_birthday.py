@@ -18,7 +18,7 @@ import polars            as pl
 
 os.makedirs("images", exist_ok=True)
 
-def plot_birthday(index: np.ndarray, p:np.ndarray) -> None:
+def plot_dist(index: np.ndarray, p:np.ndarray) -> None:
     plt.figure(figsize = (7, 9))
     sns.set_theme(style = 'darkgrid')
     plt.title(f'P_X(x) = 0.50')
@@ -42,7 +42,18 @@ def plot_birthday(index: np.ndarray, p:np.ndarray) -> None:
         linestyle = ':'
     )
     plt.tight_layout()
-    plt.savefig("images/birthday.png",
+    plt.savefig("images/birthday_dist.png",
+        dpi=150,
+        bbox_inches="tight"
+    )
+    plt.close()
+
+def plot_freq(index: np.ndarray, freq: np.ndarray) -> None:
+    plt.bar(index, freq)
+    plt.xlabel("X = x")
+    plt.ylabel("FREQUENCIES")
+    plt.tight_layout()
+    plt.savefig("images/birthday_freq.png",
         dpi=150,
         bbox_inches="tight"
     )
@@ -51,11 +62,14 @@ def plot_birthday(index: np.ndarray, p:np.ndarray) -> None:
 def main() -> None:
     with pa.ipc.open_stream(sys.stdin.buffer) as reader:
         table = reader.read_all()
-    df = pl.read_ipc_stream(sys.stdin.buffer.read())
+    pl.Config.set_tbl_width_chars(150)
+    df    = pl.from_arrow(table)
+    index = table["k"].chunk(0).to_numpy(zero_copy_only=True)
+    p     = table["p_k"].chunk(0).to_numpy(zero_copy_only=True)
+    freq  = table["frequency"].chunk(0).to_numpy(zero_copy_only=True)
     print(df)
-    index = table["k"].to_numpy()
-    p = table["p_k"].to_numpy()
-    plot_birthday(index, p)
+    plot_dist(index, p)
+    plot_freq(index, freq)
 
 if __name__ == "__main__":
     main()
