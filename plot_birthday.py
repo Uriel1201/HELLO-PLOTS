@@ -5,14 +5,16 @@
 #     "seaborn>=0.13.2",
 #     "numpy>=2.5.4",
 #     "pyarrow>=26.0.0",
+#     "polars>=1.44.1",
 # ]
 # ///
 import os
 import sys
 import matplotlib.pyplot as plt
-import seaborn as sns
-import numpy as np
-import pyarrow as pa
+import seaborn           as sns
+import numpy             as np
+import pyarrow           as pa
+import polars            as pl
 
 os.makedirs("images", exist_ok=True)
 
@@ -49,6 +51,8 @@ def plot_birthday(index: np.ndarray, p:np.ndarray) -> None:
 def main() -> None:
     with pa.ipc.open_stream(sys.stdin.buffer) as reader:
         table = reader.read_all()
+    df = pl.read_ipc_stream(sys.stdin.buffer.read())
+    print(df)
     index = table["k"].to_numpy()
     p = table["p_k"].to_numpy()
     plot_birthday(index, p)
