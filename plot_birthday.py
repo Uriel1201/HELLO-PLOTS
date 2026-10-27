@@ -60,7 +60,10 @@ def plot_freq(index: np.ndarray, freq: np.ndarray) -> None:
     plt.close()
 
 def main() -> None:
-    with pa.ipc.open_stream(sys.stdin.buffer) as reader:
+    data = sys.stdin.buffer.read()
+    if not data:
+        sys.exit(1)  
+    with pa.ipc.open_stream(pa.py_buffer(data)) as reader:
         table = reader.read_all()
     pl.Config.set_tbl_width_chars(150)
     df    = pl.from_arrow(table)
