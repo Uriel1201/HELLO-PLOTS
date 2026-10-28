@@ -78,8 +78,9 @@ def main() -> None:
     name_0      = table.column_names[0]
     name_1      = table.column_names[1]
     name_2      = table.column_names[2]
-    df          = (pl.from_arrow(table)
-                     .filter(pl.col(name_2) <= 0.5)
+    df          = pl.from_arrow(table)
+    df          = df.head(df.select((pl.col(name_2) >= 0.5).arg_max()
+        ).item() + 1
     )
     index       = df[name_0]
     frequencies = df[name_1]
