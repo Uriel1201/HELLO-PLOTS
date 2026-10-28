@@ -86,7 +86,8 @@ def main() -> None:
     pounds      = df[name_2]
     plot_dist(index, pounds)
     plot_freq(index, frequencies)
-    print(df.head(5))
+    print("first_index_at_least_50_percent:\n")
+    print(df[-1])
 
 if __name__ == "__main__":
     main()
