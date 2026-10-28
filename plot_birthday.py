@@ -79,7 +79,7 @@ def main() -> None:
     name_1      = table.column_names[1]
     name_2      = table.column_names[2]
     df          = (pl.from_arrow(table)
-                     .filter(pl.col(name_2) >= 0.5)
+                     .filter(pl.col(name_0) <= 23)
     )
     index       = df[name_0]
     frequencies = df[name_1]
@@ -95,7 +95,7 @@ def main() -> None:
         frequencies
     )
     print("first_index_at_least_50_percent:\n")
-    print(df[-1])
+    print(df)
 
 if __name__ == "__main__":
     main()
