@@ -84,8 +84,16 @@ def main() -> None:
     index       = df[name_0]
     frequencies = df[name_1]
     pounds      = df[name_2]
-    plot_dist(index, pounds)
-    plot_freq(index, frequencies)
+    plot_dist(name_0, 
+        index, 
+        name_2, 
+        pounds
+    )
+    plot_freq(name_0, 
+        index, 
+        name_1,
+        frequencies
+    )
     print("first_index_at_least_50_percent:\n")
     print(df[-1])
 
