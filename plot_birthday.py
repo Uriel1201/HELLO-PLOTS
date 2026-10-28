@@ -21,7 +21,7 @@ os.makedirs("images", exist_ok=True)
 def plot_dist(
     index_label: str,
     index:       pl.Series, 
-    p_label:     str
+    p_label:     str,
     p:           pl.Series
 ) -> None:
     plt.figure(figsize = (7, 9))
