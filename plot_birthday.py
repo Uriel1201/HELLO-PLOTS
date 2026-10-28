@@ -18,12 +18,16 @@ import polars            as pl
 
 os.makedirs("images", exist_ok=True)
 
-def plot_dist(index: np.ndarray, p:np.ndarray) -> None:
+def plot_dist(
+    index_label: str,
+    index:       pl.Series, 
+    p_label:     str
+    p:           pl.Series
+) -> None:
     plt.figure(figsize = (7, 9))
     sns.set_theme(style = 'darkgrid')
-    plt.title(f'P_X(x) = 0.50')
-    plt.xlabel(f'x')
-    plt.ylabel(f'Distribution Function')
+    plt.xlabel(index_label)
+    plt.ylabel(p_label)
     sns.scatterplot(x = index,
         y = p,
         color = '#088F8F'
@@ -48,10 +52,15 @@ def plot_dist(index: np.ndarray, p:np.ndarray) -> None:
     )
     plt.close()
 
-def plot_freq(index: np.ndarray, freq: np.ndarray) -> None:
-    plt.bar(index, freq)
-    plt.xlabel("X = x")
-    plt.ylabel("FREQUENCIES")
+def plot_freq(
+    index_label:       str, 
+    index:             pl.Series,
+    frequencies_label: str,
+    frequencies:       pl.Series
+) -> None:
+    plt.bar(index, frequencies)
+    plt.xlabel(index_label)
+    plt.ylabel(frequencies_label)
     plt.tight_layout()
     plt.savefig("images/birthday_freq.png",
         dpi=150,
@@ -62,15 +71,17 @@ def plot_freq(index: np.ndarray, freq: np.ndarray) -> None:
 def main() -> None:
     data = sys.stdin.buffer.read()
     if not data:
-        sys.exit(1)  
+        sys.exit(1)
     with pa.ipc.open_stream(pa.py_buffer(data)) as reader:
         table = reader.read_all()
     pl.Config.set_tbl_width_chars(150)
-    df    = pl.from_arrow(table)
-    index = table["k"].chunk(0).to_numpy(zero_copy_only=True)
-    p     = table["p_k"].chunk(0).to_numpy(zero_copy_only=True)
-    freq  = table["frequency"].chunk(0).to_numpy(zero_copy_only=True)
-    print(df)
+    df          = pl.from_arrow(table)
+    name_0      = table.column_names[0]
+    name_1      = table.column_names[1]
+    name_2      = table.column_names[2]
+    index       = df[name_0]
+    p           = df[name_1]
+    frequencies = df[name_2]
     plot_dist(index, p)
     plot_freq(index, freq)
 
