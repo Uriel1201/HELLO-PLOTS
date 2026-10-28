@@ -79,7 +79,7 @@ def main() -> None:
     name_1      = table.column_names[1]
     name_2      = table.column_names[2]
     df          = (pl.from_arrow(table)
-                     .filter(pl.col(name_0) <= 23)
+                     .filter(pl.col(name_2) <= 0.5)
     )
     index       = df[name_0]
     frequencies = df[name_1]
