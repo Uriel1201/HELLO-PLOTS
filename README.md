@@ -9,4 +9,4 @@
 ### Polars
 <img
 src="https://raw.githubusercontent.com/Uriel1201/data-repository/refs/heads/main/images/images.png"
-alt="Hello" width="100">
+alt="Hello" width="130">
