@@ -86,6 +86,7 @@ def main() -> None:
     pounds      = df[name_2]
     plot_dist(index, pounds)
     plot_freq(index, frequencies)
+    print(df.head(5))
 
 if __name__ == "__main__":
     main()
