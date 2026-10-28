@@ -75,15 +75,17 @@ def main() -> None:
     with pa.ipc.open_stream(pa.py_buffer(data)) as reader:
         table = reader.read_all()
     pl.Config.set_tbl_width_chars(150)
-    df          = pl.from_arrow(table)
     name_0      = table.column_names[0]
     name_1      = table.column_names[1]
     name_2      = table.column_names[2]
+    df          = (pl.from_arrow(table)
+                     .filter(pl.col(name_2) >= 0.5)
+    )
     index       = df[name_0]
-    p           = df[name_1]
-    frequencies = df[name_2]
-    plot_dist(index, p)
-    plot_freq(index, freq)
+    frequencies = df[name_1]
+    pounds      = df[name_2]
+    plot_dist(index, pounds)
+    plot_freq(index, frequencies)
 
 if __name__ == "__main__":
     main()
